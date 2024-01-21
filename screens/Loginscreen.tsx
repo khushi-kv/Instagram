@@ -9,7 +9,7 @@ import {
   VStack,
 } from '@gluestack-ui/themed';
 
-function Loginscreen() {
+function Loginscreen({navigation}: any) {
   return (
     <SafeAreaView>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -18,10 +18,11 @@ function Loginscreen() {
           width={'75%'}
           marginTop={'$8'}
           source={{
-            uri: 'https://i0.wp.com/www.dafontfree.io/wp-content/uploads/2020/12/instagram-new.png?resize=1100%2C750&ssl=1',
+            uri: 'https://assets.turbologo.com/blog/en/2019/09/19084953/instagram-logo-illustration-958x575.png',
           }}
           alt="Logo"
           alignSelf="center"
+          backgroundColor="transparent"
         />
 
         <Input
@@ -42,8 +43,7 @@ function Loginscreen() {
             height={'$10'}
             alignSelf="center"
             rounded={8}
-            //   onPress={handleLogin}
-          >
+            onPress={() => navigation.navigate('Home')}>
             <ButtonText>Log in</ButtonText>
           </Button>
         </VStack>
