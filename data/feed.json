@@ -1,0 +1,25 @@
+[
+  {
+    "Title": "Feed 1",
+    "Images": [
+      {
+        "Url": "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?cs=srgb&dl=pexels-james-wheeler-414612.jpg&fm=jpg",
+        "Width": 600,
+        "Height": 400
+      },
+      {
+        "Url": "https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg",
+        "Width": 600,
+        "Height": 400
+      },
+      {
+        "Url": "https://slp-statics.astockcdn.net/static_assets/staging/24winter/home/curated-collections/card-2.jpg?width=580",
+        "Width": 600,
+        "Height": 400
+      }
+    ],
+    "Username": "Andrew",
+    "Date": "2022-01-01T00:00:00.000Z",
+    "Content": "Demo....."
+  }
+]

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
 import {
   Button,
@@ -10,21 +10,40 @@ import {
 } from '@gluestack-ui/themed';
 
 function Loginscreen({navigation}: any) {
+  const [username, setUsername] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-shadow
+  const isValidUsername = (username: string) => {
+    return username.length > 3;
+  };
+
+  const handleLogin = () => {
+    if (isValidUsername(username)) {
+      navigation.navigate('Home');
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('Please enter a valid username');
+    }
+  };
+
   return (
-    <SafeAreaView>
+    // eslint-disable-next-line react-native/no-inline-styles
+    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Image
-          size="lg"
-          width={'75%'}
-          marginTop={'$8'}
+          // eslint-disable-next-line react-native/no-inline-styles
+          style={{
+            width: 350,
+            height: 100,
+            marginTop: 40,
+            alignSelf: 'center',
+            backgroundColor: '#FFFFFF',
+          }}
           source={{
             uri: 'https://assets.turbologo.com/blog/en/2019/09/19084953/instagram-logo-illustration-958x575.png',
+            alt: 'Logo',
+            alignSelf: 'center',
           }}
-          alt="Logo"
-          alignSelf="center"
-          backgroundColor="transparent"
         />
-
         <Input
           variant="outline"
           width={'75%'}
@@ -35,7 +54,12 @@ function Loginscreen({navigation}: any) {
           isInvalid={false}
           isReadOnly={false}
           backgroundColor="#FAFAFA">
-          <InputField placeholder="Username" fontSize={14} />
+          <InputField
+            placeholder="Phone number, username, or email"
+            fontSize={14}
+            value={username}
+            onChange={e => setUsername(e.nativeEvent.text)}
+          />
         </Input>
         <VStack space="lg" pt="$10">
           <Button
@@ -43,8 +67,8 @@ function Loginscreen({navigation}: any) {
             height={'$10'}
             alignSelf="center"
             rounded={8}
-            onPress={() => navigation.navigate('Home')}>
-            <ButtonText>Log in</ButtonText>
+            onPress={handleLogin}>
+            <ButtonText bold>Log in</ButtonText>
           </Button>
         </VStack>
       </ScrollView>
