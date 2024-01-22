@@ -50,50 +50,96 @@ function Homescreen() {
           }}
           alt="MessageIcon"
         />
-        <Box top={60}>
-          {feed.map((data, index) => (
-            <>
-              <View key={index}>
-                <HStack>
+        <Box marginTop={60}>
+          <Box top={10} position="relative">
+            {feed.map((data, index) => (
+              <>
+                <>
+                  <View key={index}>
+                    <HStack>
+                      <Image
+                        source={{
+                          uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScaAsiURlbNIvNkNi5UCRzXStgONEKRH6emg&usqp=CAU',
+                        }}
+                        width={30}
+                        height={30}
+                        left={10}
+                        alt="UserImage"
+                        rounded={'$full'}
+                      />
+                      <Text marginTop={4} left={16}>
+                        {data.Username}
+                      </Text>
+                      <Image
+                        source={{
+                          uri: 'https://static.vecteezy.com/system/resources/previews/021/190/333/original/more-vertical-three-dots-settings-filled-icon-in-transparent-background-basic-app-and-web-ui-bold-line-icon-eps10-free-vector.jpg',
+                        }}
+                        width={30}
+                        height={30}
+                        alt="Icon"
+                        position="absolute"
+                        right={10}
+                      />
+                    </HStack>
+
+                    <ScrollView horizontal top={6}>
+                      {data.Images.map((image, i) => (
+                        <Image
+                          key={i}
+                          source={{uri: image.Url}}
+                          width={image.Width}
+                          height={image.Height}
+                          alt="Image"
+                        />
+                      ))}
+                    </ScrollView>
+                  </View>
+                </>
+                <HStack p={6} marginTop={10} gap={14}>
                   <Image
-                    source={{
-                      uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScaAsiURlbNIvNkNi5UCRzXStgONEKRH6emg&usqp=CAU',
-                    }}
-                    width={30}
-                    height={30}
-                    left={10}
-                    alt="UserImage"
-                    rounded={'$full'}
+                    source={require('../public/Images/heart.png')}
+                    width={20}
+                    height={20}
+                    alt="heartIcon"
                   />
-                  <Text marginTop={4} left={16}>
-                    {data.Username}
-                  </Text>
                   <Image
                     source={{
-                      uri: 'https://static.vecteezy.com/system/resources/previews/021/190/333/original/more-vertical-three-dots-settings-filled-icon-in-transparent-background-basic-app-and-web-ui-bold-line-icon-eps10-free-vector.jpg',
+                      uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq--fJ0Y1HzOEFf2mItD8eYx6QMqrk32A5V6DEmx5FCDkg9rXFDFm9C_Y74G8T3dtfe2A&usqp=CAU',
                     }}
-                    width={30}
-                    height={30}
+                    width={20}
+                    height={20}
                     alt="Icon"
+                  />
+                  <Image
+                    source={{
+                      uri: 'https://static.thenounproject.com/png/2796195-200.png',
+                    }}
+                    width={25}
+                    height={25}
+                    position="relative"
+                    bottom={2}
+                    alt="Icon"
+                  />
+                  <Image
+                    source={{
+                      uri: 'https://img.myloview.com/stickers/save-icon-isolated-on-white-background-bookmark-symbol-modern-simple-vector-for-web-site-or-mobile-app-700-216346253.jpg',
+                    }}
+                    width={35}
+                    height={35}
                     position="absolute"
                     right={10}
+                    bottom={5}
+                    alt="Icon"
                   />
                 </HStack>
-
-                <ScrollView horizontal top={6}>
-                  {data.Images.map((image, i) => (
-                    <Image
-                      key={i}
-                      source={{uri: image.Url}}
-                      width={image.Width}
-                      height={image.Height}
-                      alt="Image"
-                    />
-                  ))}
-                </ScrollView>
-              </View>
-            </>
-          ))}
+                <HStack p={4}>
+                  <Text style={styles.Username}>{data.Username}</Text>
+                  <Text style={styles.Content}>{data.Content}</Text>
+                </HStack>
+                <Text style={styles.Date}>{data.Date}</Text>
+              </>
+            ))}
+          </Box>
         </Box>
       </View>
     </ScrollView>
@@ -103,10 +149,22 @@ function Homescreen() {
 export default Homescreen;
 
 const styles = StyleSheet.create({
+  Username: {
+    fontWeight: 'bold',
+  },
+  Content: {
+    marginLeft: 8,
+    fontSize: 14,
+    paddingRight: 12,
+    maxWidth: 320,
+    flexWrap: 'wrap',
+  },
+  Date: {
+    marginLeft: 8,
+    fontSize: 12,
+    color: 'gray',
+  },
   container: {
-    flex: 1,
     backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
