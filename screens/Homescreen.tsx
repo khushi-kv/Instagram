@@ -1,62 +1,128 @@
-import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
-import {Image, ScrollView, Box, HStack} from '@gluestack-ui/themed';
-import feed from '../data/feed.json';
+import React, {useCallback, useState} from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  RefreshControl,
+  TouchableOpacity,
+} from 'react-native';
+import {Image, Box, HStack, ScrollView} from '@gluestack-ui/themed';
 import {SliderBox} from 'react-native-image-slider-box';
-
-// import Swiper from 'react-native-swiper';
-// import Carousel, { Pagination } from 'react-native-snap-carousel';
+import feeds from '../data/feed.json';
+import {styles} from '../styles/HomescreenStyle';
+function shuffleArray(array: any[]) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+let feed = [...feeds];
 function Homescreen() {
-  return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Image
-          size="xs"
-          width={'45%'}
-          position="absolute"
-          top={5}
-          left={-16}
-          source={{
-            uri: 'https://assets.turbologo.com/blog/en/2019/09/19084953/instagram-logo-illustration-958x575.png',
-          }}
-          alt="Logo"
-        />
-        {/* <Image
-          size="xs"
-          width={12}
-          height={12}
-          position="absolute"
-          top={20}
-          left={130}
-          source={{
-            uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-MoCoHaAPT9kmJhBGb2pqu3E4gnbGP3w4Sw&usqp=CAU',
-          }}
-          alt="Down Arrow"
-        /> */}
+  const [visibleFeedCount, setVisibleFeedCount] = useState(2);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const handleEndReached = () => {
+    console.log('visibleFeedCount:', visibleFeedCount);
+    console.log('feed.length:', feed.length);
+    // Load more content when the end is reached
+    if (visibleFeedCount < feed.length && !loadingMore) {
+      setLoadingMore(true);
+      setTimeout(() => {
+        setVisibleFeedCount(prevCount => prevCount + 1);
+        setLoadingMore(false);
+        console.log('End reached! Loading more content...');
+      }, 1000);
+    } else {
+      console.log('End reached, but no more content to load.');
+    }
+  };
 
-        <Image
-          source={require('../public/Images/heart.png')}
-          width={20}
-          height={20}
-          position="absolute"
-          top={9}
-          right={60}
-          alt="heartIcon"
-        />
-        <Image
-          size="xs"
-          width={20}
-          position="absolute"
-          top={-1}
-          right={20}
-          source={{
-            uri: 'https://st2.depositphotos.com/38069286/42112/v/450/depositphotos_421121214-stock-illustration-direct-messages-button-icon-isolated.jpg',
-          }}
-          alt="MessageIcon"
-        />
-        <Box marginTop={50}>
-          {feed.map((data, index) => (
-            <Box marginTop={10}>
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    const shuffledFeed = shuffleArray(feed);
+    setVisibleFeedCount(2);
+    feed = shuffledFeed;
+    setRefreshing(false);
+  }, []);
+  const renderLoader = () => (
+    <View style={styles.loaderContainer}>
+      <ActivityIndicator size="small" color="#15ccf9" />
+      <Text style={styles.loaderText}>Loading more content...</Text>
+    </View>
+  );
+  const renderHeader = () => (
+    <View style={styles.container}>
+      <Image
+        size="xs"
+        width={'45%'}
+        position="absolute"
+        top={5}
+        left={-16}
+        source={{
+          uri: 'https://assets.turbologo.com/blog/en/2019/09/19084953/instagram-logo-illustration-958x575.png',
+        }}
+        alt="Logo"
+      />
+      {/* <Image
+       
+        source={{
+          uri: 'https://media.istockphoto.com/id/995576958/vector/icon-add-logo-design-universal-business-social-media.jpg?s=612x612&w=0&k=20&c=UeUwBzmQs1PEzb3grZZwmI3rZrqXDGoNt_JaqZ6ajNY=',
+        }}
+        width={30}
+        height={30}
+        position="absolute"
+        right={95}
+        top={4}
+        alt="AdPostIcon"
+      /> */}
+      <Image
+        source={require('../public/Images/heart.png')}
+        width={20}
+        height={20}
+        position="absolute"
+        top={9}
+        right={60}
+        alt="heartIcon"
+      />
+      <Image
+        size="xs"
+        width={20}
+        position="absolute"
+        top={-1}
+        right={20}
+        source={{
+          uri: 'https://st2.depositphotos.com/38069286/42112/v/450/depositphotos_421121214-stock-illustration-direct-messages-button-icon-isolated.jpg',
+        }}
+        alt="MessageIcon"
+      />
+    </View>
+  );
+  const NewPostFAB = ({onPress}: any) => {
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.fab} onPress={onPress}>
+          <Text style={styles.fabText}>+</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+  const handleNewPost = () => {
+    // Implement the logic to open a new post form or navigate to a new post screen
+    console.log('Adding a new blog/post!');
+  };
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        ListHeaderComponent={renderHeader}
+        ListHeaderComponentStyle={styles.headerContainer}
+        data={feed.slice(0, visibleFeedCount)}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item: feedItem, index}) => (
+          <Box marginTop={30}>
+            <Box top={20}>
               <View key={index}>
                 <HStack>
                   <Image
@@ -69,8 +135,8 @@ function Homescreen() {
                     alt="UserImage"
                     rounded={'$full'}
                   />
-                  <Text marginTop={4} left={16}>
-                    {data.Username}
+                  <Text marginTop={4} left={16} style={styles.Username}>
+                    {feedItem.Username}
                   </Text>
                   <Image
                     source={{
@@ -86,7 +152,7 @@ function Homescreen() {
 
                 <SliderBox
                   top={6}
-                  images={data.Images.map(image => image.Url)}
+                  images={feedItem.Images.map(image => image.Url)}
                   dotColor="#15ccf9"
                   inactiveDotColor="grey"
                   dotStyle={{
@@ -94,9 +160,6 @@ function Homescreen() {
                     height: 5,
                     width: 5,
                   }}
-                  // autoplay={true}
-                  // autoplayInterval={4000}
-                  // circleLoop={true}
                 />
               </View>
               <HStack p={6} left={7} marginTop={10} gap={14}>
@@ -138,8 +201,8 @@ function Homescreen() {
               </HStack>
               <Text left={10}>Liked by jenn_hann and others</Text>
               <HStack p={4} left={7}>
-                <Text style={styles.Username}>{data.Username}</Text>
-                <Text style={styles.Content}>{data.Content}</Text>
+                <Text style={styles.Username}>{feedItem.Username}</Text>
+                <Text style={styles.Content}>{feedItem.Content}</Text>
               </HStack>
               <Text style={styles.Comment}>View all comments</Text>
               <HStack>
@@ -156,49 +219,19 @@ function Homescreen() {
                 />
                 <Text style={styles.AddComment}>Add a comment...</Text>
               </HStack>
-              <Text style={styles.Date}>{data.Date}</Text>
+              <Text style={styles.Date}>{feedItem.Date}</Text>
             </Box>
-          ))}
-        </Box>
-      </View>
-    </ScrollView>
+          </Box>
+        )}
+        onEndReached={handleEndReached}
+        onEndReachedThreshold={0.1}
+        ListFooterComponent={loadingMore ? renderLoader : null}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      />
+    </View>
   );
 }
 
 export default Homescreen;
-
-const styles = StyleSheet.create({
-  Username: {
-    fontWeight: '500',
-  },
-  Feed: {
-    top: 10,
-  },
-  Content: {
-    marginLeft: 7,
-    fontSize: 13,
-    paddingRight: 12,
-    maxWidth: 320,
-    flexWrap: 'wrap',
-  },
-  Date: {
-    marginTop: 12,
-    marginLeft: 8,
-    fontSize: 12,
-    color: 'gray',
-  },
-  Comment: {
-    left: 10,
-    fontSize: 12,
-    color: 'gray',
-  },
-  AddComment: {
-    borderWidth: 0,
-    top: 20,
-    left: 22,
-    color: 'gray',
-  },
-  container: {
-    backgroundColor: 'white',
-  },
-});
