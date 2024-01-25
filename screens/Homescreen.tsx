@@ -7,10 +7,16 @@ import {
   RefreshControl,
   TouchableOpacity,
 } from 'react-native';
-import {Image, Box, HStack, ScrollView} from '@gluestack-ui/themed';
+import {Image, Box, HStack} from '@gluestack-ui/themed';
+// @ts-ignore
 import {SliderBox} from 'react-native-image-slider-box';
 import feeds from '../data/feed.json';
 import {styles} from '../styles/HomescreenStyle';
+
+// @ts-ignore
+import AntdesignIcon from 'react-native-vector-icons/AntDesign';
+// @ts-ignore
+
 function shuffleArray(array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -65,18 +71,16 @@ function Homescreen() {
         }}
         alt="Logo"
       />
-      {/* <Image
-       
-        source={{
-          uri: 'https://media.istockphoto.com/id/995576958/vector/icon-add-logo-design-universal-business-social-media.jpg?s=612x612&w=0&k=20&c=UeUwBzmQs1PEzb3grZZwmI3rZrqXDGoNt_JaqZ6ajNY=',
-        }}
-        width={30}
-        height={30}
+
+      {/* <AntdesignIcon
+        name="codepen"
+        size={50}
         position="absolute"
-        right={95}
-        top={4}
-        alt="AdPostIcon"
+        left={220}
+        top={10}
+        color="#232222"
       /> */}
+
       <Image
         source={require('../public/Images/heart.png')}
         width={20}

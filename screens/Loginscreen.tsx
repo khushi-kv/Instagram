@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {SafeAreaView, ScrollView} from 'react-native';
+import {SafeAreaView, ScrollView,Image} from 'react-native';
 import {
   Button,
   ButtonText,
-  Image,
   Input,
   InputField,
   VStack,
