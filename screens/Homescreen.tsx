@@ -8,13 +8,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Image, Box, HStack} from '@gluestack-ui/themed';
+import BlogDetailscreen from './BlogDetailscreen';
 // @ts-ignore
 import {SliderBox} from 'react-native-image-slider-box';
 import feeds from '../data/feed.json';
 import {styles} from '../styles/HomescreenStyle';
+import {useNavigation} from '@react-navigation/native';
 
 // @ts-ignore
 import AntdesignIcon from 'react-native-vector-icons/AntDesign';
+import Tabs from '../navigation/Tabs';
+
 // @ts-ignore
 
 function shuffleArray(array: any[]) {
@@ -58,6 +62,8 @@ function Homescreen() {
       <Text style={styles.loaderText}>Loading more content...</Text>
     </View>
   );
+  const navigation = useNavigation();
+
   const renderHeader = () => (
     <View style={styles.container}>
       <Image
@@ -90,6 +96,7 @@ function Homescreen() {
         right={60}
         alt="heartIcon"
       />
+
       <Image
         size="xs"
         width={20}
@@ -129,19 +136,25 @@ function Homescreen() {
             <Box top={20}>
               <View key={index}>
                 <HStack>
-                  <Image
-                    source={{
-                      uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScaAsiURlbNIvNkNi5UCRzXStgONEKRH6emg&usqp=CAU',
-                    }}
-                    width={30}
-                    height={30}
-                    left={10}
-                    alt="UserImage"
-                    rounded={'$full'}
-                  />
-                  <Text marginTop={4} left={16} style={styles.Username}>
-                    {feedItem.Username}
-                  </Text>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('BlogDetailscreen')}>
+                    <Image
+                      source={{
+                        uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScaAsiURlbNIvNkNi5UCRzXStgONEKRH6emg&usqp=CAU',
+                      }}
+                      width={30}
+                      height={30}
+                      left={10}
+                      alt="UserImage"
+                      rounded={'$full'}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('BlogDetailscreen')}>
+                    <Text marginTop={4} left={16} style={styles.Username}>
+                      {feedItem.Username}
+                    </Text>
+                  </TouchableOpacity>
                   <Image
                     source={{
                       uri: 'https://static.vecteezy.com/system/resources/previews/021/190/333/original/more-vertical-three-dots-settings-filled-icon-in-transparent-background-basic-app-and-web-ui-bold-line-icon-eps10-free-vector.jpg',

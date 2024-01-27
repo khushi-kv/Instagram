@@ -17,7 +17,7 @@ function Loginscreen({navigation}: any) {
 
   const handleLogin = () => {
     if (isValidUsername(username)) {
-      navigation.navigate('Home');
+      navigation.navigate('Tabs');
     } else {
       // eslint-disable-next-line no-alert
       alert('Please enter a valid username');

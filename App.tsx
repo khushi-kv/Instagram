@@ -1,11 +1,9 @@
 import React from 'react';
 import {GluestackUIProvider} from '@gluestack-ui/themed';
 import {config} from '@gluestack-ui/config';
-import Loginscreen from './screens/Loginscreen';
-import Homescreen from './screens/Homescreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Tabs from './navigation/Tabs';
+import AuthStack from './navigation/AuthStack';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -13,11 +11,12 @@ export default function App() {
     <>
       <GluestackUIProvider config={config}>
         <NavigationContainer>
-         
           <Stack.Navigator>
-            {/* <Stack.Screen name="Login" component={Loginscreen} />
-            <Stack.Screen name="Home" component={Homescreen} /> */}
-            <Stack.Screen name='Tabs' component={Tabs} />
+            <Stack.Screen
+              name="AuthStack"
+              component={AuthStack}
+              options={{headerShown: false}}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </GluestackUIProvider>

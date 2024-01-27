@@ -5,6 +5,9 @@ import Searchscreen from '../screens/Searchscreen';
 import Addpostscreen from '../screens/Addpostscreen';
 import Profilescreen from '../screens/Profilescreen';
 import {Image, View} from 'react-native';
+import Loginscreen from '../screens/Loginscreen';
+import Reelscreen from '../screens/Reelscreen';
+import {createStackNavigator} from '@react-navigation/stack';
 const Tab = createBottomTabNavigator();
 function Tabs() {
   return (
@@ -13,6 +16,7 @@ function Tabs() {
         name="Home"
         component={Homescreen}
         options={{
+          title: '',
           tabBarIcon: ({focused}) => (
             <View
               style={{
@@ -25,7 +29,7 @@ function Tabs() {
                 style={{
                   width: 25,
                   height: 30,
-                  bottom: 10,
+
                   tintColor: focused ? '#0f0f10' : 'gray',
                 }}
               />
@@ -36,6 +40,7 @@ function Tabs() {
         name="Search"
         component={Searchscreen}
         options={{
+          title: '',
           tabBarIcon: ({focused}) => (
             <View
               style={{
@@ -48,7 +53,7 @@ function Tabs() {
                 style={{
                   width: 25,
                   height: 25,
-                  bottom: 10,
+
                   tintColor: focused ? '#0f0f10' : 'gray',
                 }}
               />
@@ -59,6 +64,7 @@ function Tabs() {
         name="Add"
         component={Addpostscreen}
         options={{
+          title: '',
           tabBarIcon: ({focused}) => (
             <View
               style={{
@@ -71,7 +77,31 @@ function Tabs() {
                 style={{
                   width: 25,
                   height: 25,
-                  bottom: 10,
+
+                  tintColor: focused ? '#0f0f10' : 'gray',
+                }}
+              />
+            </View>
+          ),
+        }}></Tab.Screen>
+      <Tab.Screen
+        name="Reel"
+        component={Reelscreen}
+        options={{
+          title: '',
+          tabBarIcon: ({focused}) => (
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                top: 10,
+              }}>
+              <Image
+                source={require('../public/Images/reels.png')}
+                style={{
+                  width: 25,
+                  height: 25,
+
                   tintColor: focused ? '#0f0f10' : 'gray',
                 }}
               />
@@ -82,6 +112,7 @@ function Tabs() {
         name="Profile"
         component={Profilescreen}
         options={{
+          title: '',
           tabBarIcon: ({focused}) => (
             <View
               style={{
@@ -94,7 +125,6 @@ function Tabs() {
                 style={{
                   width: 35,
                   height: 35,
-                  bottom: 10,
                 }}
               />
             </View>
