@@ -30,7 +30,7 @@ function Tabs() {
                   width: 25,
                   height: 30,
 
-                  tintColor: focused ? '#0f0f10' : 'gray',
+                  tintColor: '#0f0f10',
                 }}
               />
             </View>
@@ -54,7 +54,7 @@ function Tabs() {
                   width: 25,
                   height: 25,
 
-                  tintColor: focused ? '#0f0f10' : 'gray',
+                  tintColor: '#0f0f10',
                 }}
               />
             </View>
@@ -78,7 +78,7 @@ function Tabs() {
                   width: 25,
                   height: 25,
 
-                  tintColor: focused ? '#0f0f10' : 'gray',
+                  tintColor: '#0f0f10',
                 }}
               />
             </View>
@@ -102,7 +102,7 @@ function Tabs() {
                   width: 25,
                   height: 25,
 
-                  tintColor: focused ? '#0f0f10' : 'gray',
+                  tintColor: '#0f0f10',
                 }}
               />
             </View>

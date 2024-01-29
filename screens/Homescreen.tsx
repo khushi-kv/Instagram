@@ -110,19 +110,8 @@ function Homescreen() {
       />
     </View>
   );
-  const NewPostFAB = ({onPress}: any) => {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.fab} onPress={onPress}>
-          <Text style={styles.fabText}>+</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-  const handleNewPost = () => {
-    // Implement the logic to open a new post form or navigate to a new post screen
-    console.log('Adding a new blog/post!');
-  };
+  
+ 
 
   return (
     <View style={styles.container}>
@@ -216,7 +205,7 @@ function Homescreen() {
                   alt="Icon"
                 />
               </HStack>
-              <Text left={10}>Liked by jenn_hann and others</Text>
+              <Text left={10} style={{color:'black'}}>Liked by jenn_hann and others</Text>
               <HStack p={4} left={7}>
                 <Text style={styles.Username}>{feedItem.Username}</Text>
                 <Text style={styles.Content}>{feedItem.Content}</Text>

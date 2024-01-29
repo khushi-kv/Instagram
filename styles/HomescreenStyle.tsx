@@ -5,8 +5,10 @@ export const styles = StyleSheet.create({
   },
   Username: {
     fontWeight: '500',
+    color: 'black',
   },
   Content: {
+    color:'black',
     marginLeft: 7,
     fontSize: 13,
     paddingRight: 12,
