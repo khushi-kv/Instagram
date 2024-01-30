@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View, TextInput, Button, Image} from 'react-native';
+import {View, TextInput, Button, Image} from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import {useNavigation} from '@react-navigation/native';
 
@@ -8,7 +8,7 @@ function Addpostscreen() {
   const [body, setBody] = useState('');
   const [image, setImage] = useState<string | null>(null);
 
-  const navigation = useNavigation(); // Move useNavigation to the top level
+  const navigation = useNavigation();
 
   const selectImage = async () => {
     try {
