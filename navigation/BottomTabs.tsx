@@ -9,7 +9,7 @@ import Loginscreen from '../screens/Loginscreen';
 import Reelscreen from '../screens/Reelscreen';
 import {createStackNavigator} from '@react-navigation/stack';
 const Tab = createBottomTabNavigator();
-function Tabs() {
+function BottomTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -121,11 +121,17 @@ function Tabs() {
                 top: 10,
               }}>
               <Image
-                source={require('../public/Images/profile.png')}
-                style={{
-                  width: 35,
-                  height: 35,
+                source={{
+                  uri:"https://as2.ftcdn.net/v2/jpg/04/78/48/71/1000_F_478487125_LgvcBMZ9MTNqhbD7owSLb3YMZSKWmrT4.jpg"
                 }}
+                
+                style={{
+                  width: 30,
+                  height: 30,
+                  borderRadius:50
+                }}
+                alt="Profile"
+              
               />
             </View>
           ),
@@ -134,4 +140,4 @@ function Tabs() {
   );
 }
 
-export default Tabs;
+export default BottomTabs;

@@ -1,10 +1,16 @@
-import React from 'react';
-import {Text, ScrollView, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Text, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
 import {Box, Image, VStack, Button, MenuItem} from '@gluestack-ui/themed';
 import {CommonActions} from '@react-navigation/native';
 import profiledata from '../data/profile.json';
 import {HStack} from '@gluestack-ui/themed';
+import { styles } from '../styles/ProfilescreenStyle';
 function Profilescreen({navigation}: any) {
+  const [currentMode, setCurrentMode] = useState('grid');
+  useEffect(() => {}, [currentMode]);
+  const handleModeChange = (mode: string) => {
+    setCurrentMode(mode);
+  };
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       {profiledata.map(item => {
@@ -106,20 +112,99 @@ function Profilescreen({navigation}: any) {
               <Text style={{color: 'black'}}>
                 Keep your favourite stories on your profile
               </Text>
-              {/* <Button backgroundColor=''>
+              <Button backgroundColor="#ffffff">
                 <Image
-                source={{
-                  uri:'https:ddd',
-                }}
-                width={5}
-                height={5}
-                alt="UserImage"
-                rounded="$full"
-                borderColor='black'
-                borderWidth={1}
-                padding={40}
+                  source={{
+                    uri: 'https://static.thenounproject.com/png/103484-200.png',
+                  }}
+                  width={0}
+                  height={0}
+                  position="absolute"
+                  left={0}
+                  top={8}
+                  alt="UserImage"
+                  rounded="$full"
+                  borderColor="black"
+                  borderWidth={1}
+                  padding={20}
                 />
-              </Button> */}
+              </Button>
+              <Text style={{color: 'black', top: 10, left: 5}}>New</Text>
+
+              <HStack display="flex" flexDirection="row" justifyContent='space-between'>
+                <TouchableOpacity onPress={() => handleModeChange('grid')}>
+                  <Image
+                    source={{
+                      uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAYFBMVEX///8AAAD6+vqsrKzw8PBbW1tfX1+FhYUVFRV3d3cMDAzDw8OPj4+AgIDd3d3h4eGbm5sfHx9SUlLn5+dRUVG/v79mZmZLS0s+Pj5DQ0PJycmYmJjY2Nhvb2+MjIx1dXWqtFQLAAABvklEQVR4nO3a227aQBSGUQKlJCRASs6H0vd/y940s+fKG6XD2LLWuv5t6ZMvPJK9WAAAAAAAAAAAAABT8eO4Ptfxn8f0kvOXxeZyhVfTsJ594U+FChWOTqHCcwqfN8N2ZflySqbbr+Vrsjy99Sx8z6ZleZctr7+WN9ly07PwNlkuL1G4U/j/FAaFFYVBYQMKg8KKwqCwAYVBYUVhUNiAwqCwojAobEBhUFhRGBQ2oDAorEy0cP5f127uh32U5TpZ3pcvpC/Z8rHcs0PhuI6zL5z/M1SoUOH45l/Y422xzXxjmU7LsMcznP+pbf4nb4UKKwqDwgYUBoUVhUFhAwqDworCoLABhUFhRWFQ2IDCoLCiMChsQGFQWFEYFDYQhavDftBnWe6S5b4UPifLw++ehePyT5RCheNTqFDh+Hq8D1cPh0H7stwly0OcaZLlQ9czzfzPpQoVVhQGhQ0oDAorCoPCBhQGhRWFQWEDCoPCisKgsAGFQWFFYVDYgMKgsKIwKGwgCp8Wy0GxPCXLZSn8kyz7Fl7/Snxjuc2W256F41KoUOH4FCqcfuHl/olarqbh6WKFAAAAAAAAAAAATMtfP5xfCK+KBBMAAAAASUVORK5CYII=',
+                    }}
+                    width={35}
+                    height={35}
+                    alt="GridIcon"
+                    rounded="$lg"
+                    top={30}
+                    left={20}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleModeChange('reels')}>
+                  <Image
+                    source={require('../public/Images/reels.png')}
+                    style={{
+                      width: 25,
+                      height: 25,
+                      tintColor:
+                        currentMode === 'reels' ? '#0f0f10' : 'gray',
+                    }}
+                    top={34}
+                   
+                    alt="Reels"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleModeChange('tagged')}>
+                  <Image
+                    source={{
+                      uri: 'https://cdn0.iconfinder.com/data/icons/instagram-ui-1/24/Instagram-UI_tagged-512.png',
+                    }}
+                    style={{
+                      width: 30,
+                      height: 30,
+                      tintColor:
+                        currentMode === 'tagged' ? '#0f0f10' : 'gray',
+                    }}
+                    top={30}
+                    right={50}
+                    alt="TaggedIcon"
+                  />
+                </TouchableOpacity>
+              </HStack>
+              {currentMode === 'grid' && (
+                <Box style={styles.profileImages}>
+                  {item.image &&
+                    item.image.length > 0 &&
+                    item.image.map((data: any) => (
+                      <Image
+                        key={data.Url}
+                        source={{
+                          uri: data.Url,
+                        }}
+                        width={data.Width}
+                        height={data.Height}
+                        alt="profileImage"
+                      />
+                    ))}
+                </Box>
+              )}
+              {currentMode === 'reels' && (
+                <Text
+                  style={{color: 'black', textAlign: 'center', marginTop: 40}}>
+                  Reels content goes here !
+                </Text>
+              )}
+              {currentMode === 'tagged' && (
+                <Text
+                  style={{color: 'black', textAlign: 'center', marginTop: 40}}>
+                  Tagged content goes here !
+                </Text>
+              )}
             </Box>
           </>
         );
@@ -140,16 +225,4 @@ function Profilescreen({navigation}: any) {
 }
 
 export default Profilescreen;
-const styles = StyleSheet.create({
-  Username: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'black',
-  },
-  text: {
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 18,
-    color: 'black',
-  },
-});
+

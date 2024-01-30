@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Image, Box, HStack} from '@gluestack-ui/themed';
-import BlogDetailscreen from './BlogDetailscreen';
 // @ts-ignore
 import {SliderBox} from 'react-native-image-slider-box';
 import feeds from '../data/feed.json';
@@ -17,7 +16,7 @@ import {useNavigation} from '@react-navigation/native';
 
 // @ts-ignore
 import AntdesignIcon from 'react-native-vector-icons/AntDesign';
-import Tabs from '../navigation/Tabs';
+import Tabs from '../navigation/BottomTabs';
 
 // @ts-ignore
 
@@ -77,15 +76,6 @@ function Homescreen() {
         }}
         alt="Logo"
       />
-
-      {/* <AntdesignIcon
-        name="codepen"
-        size={50}
-        position="absolute"
-        left={220}
-        top={10}
-        color="#232222"
-      /> */}
 
       <Image
         source={require('../public/Images/heart.png')}
