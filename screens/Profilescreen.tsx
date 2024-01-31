@@ -1,21 +1,36 @@
 import React, {useEffect, useState} from 'react';
-import {Text, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, ScrollView, TouchableOpacity, RefreshControl} from 'react-native';
 import {Box, Image, VStack, Button, MenuItem} from '@gluestack-ui/themed';
 import {CommonActions} from '@react-navigation/native';
 import profiledata from '../data/profile.json';
 import {HStack} from '@gluestack-ui/themed';
-import { styles } from '../styles/ProfilescreenStyle';
+import {styles} from '../styles/ProfilescreenStyle';
 function Profilescreen({navigation}: any) {
   const [currentMode, setCurrentMode] = useState('grid');
+  const [refreshing, setRefreshing] = useState(false);
   useEffect(() => {}, [currentMode]);
   const handleModeChange = (mode: string) => {
     setCurrentMode(mode);
   };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
+  const handleImagePress = (imageUrl: string) => {
+    navigation.navigate('BlogDetailscreen', {imageUrl});
+  };
   return (
-    <ScrollView style={{backgroundColor: '#fff'}}>
-      {profiledata.map(item => {
+    <ScrollView
+      style={{backgroundColor: '#fff'}}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
+      {profiledata.map((item: any, index: number) => {
         return (
-          <>
+          <React.Fragment key={index}>
             <HStack p={8}>
               <Text style={styles.Username}>{item.name}</Text>
               <Image
@@ -131,7 +146,10 @@ function Profilescreen({navigation}: any) {
               </Button>
               <Text style={{color: 'black', top: 10, left: 5}}>New</Text>
 
-              <HStack display="flex" flexDirection="row" justifyContent='space-between'>
+              <HStack
+                display="flex"
+                flexDirection="row"
+                justifyContent="space-between">
                 <TouchableOpacity onPress={() => handleModeChange('grid')}>
                   <Image
                     source={{
@@ -151,11 +169,9 @@ function Profilescreen({navigation}: any) {
                     style={{
                       width: 25,
                       height: 25,
-                      tintColor:
-                        currentMode === 'reels' ? '#0f0f10' : 'gray',
+                      tintColor: currentMode === 'reels' ? '#0f0f10' : 'gray',
                     }}
                     top={34}
-                   
                     alt="Reels"
                   />
                 </TouchableOpacity>
@@ -167,8 +183,7 @@ function Profilescreen({navigation}: any) {
                     style={{
                       width: 30,
                       height: 30,
-                      tintColor:
-                        currentMode === 'tagged' ? '#0f0f10' : 'gray',
+                      tintColor: currentMode === 'tagged' ? '#0f0f10' : 'gray',
                     }}
                     top={30}
                     right={50}
@@ -178,18 +193,18 @@ function Profilescreen({navigation}: any) {
               </HStack>
               {currentMode === 'grid' && (
                 <Box style={styles.profileImages}>
-                  {item.image &&
-                    item.image.length > 0 &&
-                    item.image.map((data: any) => (
-                      <Image
-                        key={data.Url}
-                        source={{
-                          uri: data.Url,
-                        }}
-                        width={data.Width}
-                        height={data.Height}
-                        alt="profileImage"
-                      />
+                  {item.Profile &&
+                    item.Profile.length > 0 &&
+                    item.Profile.map((data: any, index: number) => (
+                      <TouchableOpacity
+                        onPress={() => handleImagePress(data.Url)}>
+                        <Image
+                          source={{uri: data.Url}}
+                          style={{width: data.Width, height: data.Height}}
+                          alt="profileImage"
+                          key={index}
+                        />
+                      </TouchableOpacity>
                     ))}
                 </Box>
               )}
@@ -206,7 +221,7 @@ function Profilescreen({navigation}: any) {
                 </Text>
               )}
             </Box>
-          </>
+          </React.Fragment>
         );
       })}
 
@@ -225,4 +240,3 @@ function Profilescreen({navigation}: any) {
 }
 
 export default Profilescreen;
-

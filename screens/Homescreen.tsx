@@ -100,8 +100,6 @@ function Homescreen() {
       />
     </View>
   );
-  
- 
 
   return (
     <View style={styles.container}>
@@ -115,25 +113,21 @@ function Homescreen() {
             <Box top={20}>
               <View key={index}>
                 <HStack>
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate('BlogDetailscreen')}>
-                    <Image
-                      source={{
-                        uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScaAsiURlbNIvNkNi5UCRzXStgONEKRH6emg&usqp=CAU',
-                      }}
-                      width={30}
-                      height={30}
-                      left={10}
-                      alt="UserImage"
-                      rounded={'$full'}
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate('BlogDetailscreen')}>
-                    <Text marginTop={4} left={16} style={styles.Username}>
-                      {feedItem.Username}
-                    </Text>
-                  </TouchableOpacity>
+                  <Image
+                    source={{
+                      uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScaAsiURlbNIvNkNi5UCRzXStgONEKRH6emg&usqp=CAU',
+                    }}
+                    width={30}
+                    height={30}
+                    left={10}
+                    alt="UserImage"
+                    rounded={'$full'}
+                  />
+
+                  <Text marginTop={4} left={16} style={styles.Username}>
+                    {feedItem.Username}
+                  </Text>
+
                   <Image
                     source={{
                       uri: 'https://static.vecteezy.com/system/resources/previews/021/190/333/original/more-vertical-three-dots-settings-filled-icon-in-transparent-background-basic-app-and-web-ui-bold-line-icon-eps10-free-vector.jpg',
@@ -195,7 +189,9 @@ function Homescreen() {
                   alt="Icon"
                 />
               </HStack>
-              <Text left={10} style={{color:'black'}}>Liked by jenn_hann and others</Text>
+              <Text left={10} style={{color: 'black'}}>
+                Liked by jenn_hann and others
+              </Text>
               <HStack p={4} left={7}>
                 <Text style={styles.Username}>{feedItem.Username}</Text>
                 <Text style={styles.Content}>{feedItem.Content}</Text>
