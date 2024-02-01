@@ -18,7 +18,7 @@ import {
 } from 'react-native-popup-menu';
 import {useData} from '../context/DataContext';
 const BlogDetailscreen = React.memo(({route}: any) => {
-  const {imageId, imageUrl} = route.params;
+  const { imageUrl} = route.params;
   const [editedImageId, setEditedImageId] = useState<string | null>(null);
   // console.log("Blog image id",imageId);
   const {data, setData} = useData();
