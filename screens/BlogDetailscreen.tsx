@@ -6,9 +6,8 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
-  
 } from 'react-native';
-import { styles } from '../styles/BlogDetailStyle';
+import {styles} from '../styles/BlogDetailStyle';
 import {Box, HStack} from '@gluestack-ui/themed';
 import {
   Menu,
@@ -18,7 +17,7 @@ import {
 } from 'react-native-popup-menu';
 import {useData} from '../context/DataContext';
 const BlogDetailscreen = React.memo(({route}: any) => {
-  const { imageUrl} = route.params;
+  const {imageUrl} = route.params;
   const [editedImageId, setEditedImageId] = useState<string | null>(null);
   // console.log("Blog image id",imageId);
   const {data, setData} = useData();
@@ -45,6 +44,7 @@ const BlogDetailscreen = React.memo(({route}: any) => {
 
     setData(updatedData);
   };
+
   const handleSaveEdit = (postId: string) => {
     const updatedData = data.map(profile => ({
       ...profile,
@@ -213,7 +213,7 @@ const BlogDetailscreen = React.memo(({route}: any) => {
                             <>
                               <TextInput
                                 style={{
-                                  backgroundColor: 'green',
+                                  backgroundColor: 'white',
                                   color: 'black',
                                   left: 20,
                                   height: 40,
@@ -286,6 +286,7 @@ const BlogDetailscreen = React.memo(({route}: any) => {
                             alt="Icon"
                             style={{
                               left: 230,
+                              top:20
                             }}
                           />
                         </MenuTrigger>
@@ -362,7 +363,7 @@ const BlogDetailscreen = React.memo(({route}: any) => {
                           <>
                             <TextInput
                               style={{
-                                backgroundColor: 'red',
+                                backgroundColor: 'white',
                                 color: 'black',
                                 left: 20,
                                 height: 40,
@@ -400,4 +401,3 @@ const BlogDetailscreen = React.memo(({route}: any) => {
   );
 });
 export default BlogDetailscreen;
-

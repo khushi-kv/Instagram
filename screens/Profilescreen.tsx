@@ -196,6 +196,7 @@ function Profilescreen({navigation}: any) {
                   {item.Profile &&
                     item.Profile.length > 0 &&
                     item.Profile.map((data: any, index: number) => (
+                      <Box key={index}>
                       <TouchableOpacity
                         onPress={() => handleImagePress(data.Url)}>
                         <Image
@@ -205,6 +206,7 @@ function Profilescreen({navigation}: any) {
                           key={index}
                         />
                       </TouchableOpacity>
+                      </Box>
                     ))}
                 </Box>
               )}

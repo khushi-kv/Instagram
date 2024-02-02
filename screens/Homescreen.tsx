@@ -5,9 +5,8 @@ import {
   FlatList,
   ActivityIndicator,
   RefreshControl,
-  TouchableOpacity,
 } from 'react-native';
-import {Image, Box, HStack} from '@gluestack-ui/themed';
+import {Image, Box, HStack, VStack} from '@gluestack-ui/themed';
 // @ts-ignore
 import {SliderBox} from 'react-native-image-slider-box';
 import feeds from '../data/feed.json';
@@ -17,6 +16,7 @@ import {useNavigation} from '@react-navigation/native';
 // @ts-ignore
 import AntdesignIcon from 'react-native-vector-icons/AntDesign';
 import Tabs from '../navigation/BottomTabs';
+import Storyscreen from './Storyscreen';
 
 // @ts-ignore
 
@@ -98,10 +98,14 @@ function Homescreen() {
         }}
         alt="MessageIcon"
       />
+      <View style={{top: 20}}>
+        <Storyscreen />
+      </View>
     </View>
   );
 
   return (
+
     <View style={styles.container}>
       <FlatList
         ListHeaderComponent={renderHeader}
@@ -109,10 +113,10 @@ function Homescreen() {
         data={feed.slice(0, visibleFeedCount)}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item: feedItem, index}) => (
-          <Box marginTop={30}>
+          <Box marginTop={20}>
             <Box top={20}>
               <View key={index}>
-                <HStack>
+                <HStack >
                   <Image
                     source={{
                       uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScaAsiURlbNIvNkNi5UCRzXStgONEKRH6emg&usqp=CAU',

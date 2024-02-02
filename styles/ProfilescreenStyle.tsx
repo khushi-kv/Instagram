@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     profileImages: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      gap: 2,
+      gap: 5,
       top: 40,
     },
   });

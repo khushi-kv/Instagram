@@ -34,6 +34,7 @@ export const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: 'white',
+ 
   },
   loaderContainer: {
     flexDirection: 'row',
