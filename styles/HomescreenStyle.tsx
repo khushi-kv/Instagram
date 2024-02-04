@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     color: 'black',
   },
   Content: {
-    color:'black',
+    color: 'black',
     marginLeft: 7,
     fontSize: 13,
     paddingRight: 12,
@@ -34,7 +34,6 @@ export const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: 'white',
- 
   },
   loaderContainer: {
     flexDirection: 'row',
