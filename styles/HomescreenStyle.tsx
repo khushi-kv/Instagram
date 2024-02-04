@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   headerContainer: {
-    height: 20,
+    height: 120,
   },
   Username: {
     fontWeight: '500',
