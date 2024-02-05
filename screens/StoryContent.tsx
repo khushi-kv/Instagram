@@ -1,6 +1,7 @@
 import React from 'react';
-import {Image, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
+import {HStack} from '@gluestack-ui/themed';
 
 interface StoryProps {
   route: RouteProp<{StoryContent: {imageUrl: string}}, 'StoryContent'>;
@@ -13,7 +14,7 @@ function StoryContent({route}: StoryProps) {
     <View>
       <Image
         source={{uri: imageUrl}}
-        style={{width: '100%', height: '100%'}}
+        style={{width: '100%', height: '90%'}}
         resizeMode="cover"
         onError={error => console.error('Image Error:', error)}
       />
