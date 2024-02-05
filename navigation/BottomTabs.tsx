@@ -122,16 +122,14 @@ function BottomTabs() {
               }}>
               <Image
                 source={{
-                  uri:"https://as2.ftcdn.net/v2/jpg/04/78/48/71/1000_F_478487125_LgvcBMZ9MTNqhbD7owSLb3YMZSKWmrT4.jpg"
+                  uri: 'https://as2.ftcdn.net/v2/jpg/04/78/48/71/1000_F_478487125_LgvcBMZ9MTNqhbD7owSLb3YMZSKWmrT4.jpg',
                 }}
-                
                 style={{
                   width: 30,
                   height: 30,
-                  borderRadius:50
+                  borderRadius: 50,
                 }}
                 alt="Profile"
-              
               />
             </View>
           ),

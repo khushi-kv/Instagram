@@ -42,9 +42,9 @@ function Storyscreen() {
     };
   }, []); // Remove the dependency array to ensure it runs only once when mounted
 
-  const handleStoryPress = (item: string) => {
+  const handleStoryPress = (item: string, user: string) => {
     setTimerEnabled(false); // Enable the timer when selecting a story manually
-    const params = {imageUrl: item};
+    const params = {imageUrl: item, username: user};
     console.log('Params->', params);
     navigation.navigate('StoryContent', params);
     setSelectedStory(item);
@@ -92,11 +92,13 @@ function Storyscreen() {
               {story.map((item, index) => (
                 <TouchableOpacity
                   key={index}
-                  onPress={() => handleStoryPress(item)}>
+                  onPress={() =>
+                    handleStoryPress(item.image_url, item.username)
+                  }>
                   <View>
                     <Image
                       source={{
-                        uri: item,
+                        uri: item.image_url,
                       }}
                       width={65}
                       height={65}
