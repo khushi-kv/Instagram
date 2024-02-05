@@ -68,9 +68,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<!-- <key>NSPhotoLibraryUsageDescription</key>
-<string>We need access to your photo library to select images.</string> -->
-
 	<false/>
 </dict>
 </plist>
