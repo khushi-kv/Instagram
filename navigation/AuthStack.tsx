@@ -16,14 +16,23 @@ function AuthStack() {
       <Stack.Screen
         name="Tabs"
         component={Tabs}
-
-        options={{headerShown: false,title:''}}
+        options={{headerShown: false, title: ''}}
       />
-      <Stack.Screen name="BlogDetailscreen" component={BlogDetailscreen}  options={{
-        title:''
-      }}/>
+      <Stack.Screen
+        name="BlogDetailscreen"
+        component={BlogDetailscreen}
+        options={{
+          title: '',
+        }}
+      />
       <Stack.Screen name="Storyscreen" component={Story} />
-      <Stack.Screen name="StoryContent" component={StoryContent} />
+      <Stack.Screen
+        name="StoryContent"
+        component={StoryContent}
+        options={{
+          title: '',
+        }}
+      />
     </Stack.Navigator>
   );
 }
