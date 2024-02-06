@@ -1,10 +1,10 @@
 // Navigation/AuthStack.tsx
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Loginscreen from '../screens/Loginscreen';
+import Login from '../screens/Login';
 import Tabs from './BottomTabs';
-import BlogDetailscreen from '../screens/BlogDetailscreen';
-import Storyscreen from '../screens/Storyscreen';
+import BlogDetailscreen from '../screens/BlogDetail';
+import Story from '../screens/Story';
 import StoryContent from '../screens/StoryContent';
 
 const Stack = createNativeStackNavigator();
@@ -12,15 +12,18 @@ const Stack = createNativeStackNavigator();
 function AuthStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Login" component={Loginscreen} />
+      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen
         name="Tabs"
         component={Tabs}
-        options={{headerShown: false}}
+
+        options={{headerShown: false,title:''}}
       />
-      <Stack.Screen name="BlogDetailscreen" component={BlogDetailscreen} />
-      <Stack.Screen name='Storyscreen' component={Storyscreen} />
-      <Stack.Screen name="StoryContent" component={StoryContent}/>
+      <Stack.Screen name="BlogDetailscreen" component={BlogDetailscreen}  options={{
+        title:''
+      }}/>
+      <Stack.Screen name="Storyscreen" component={Story} />
+      <Stack.Screen name="StoryContent" component={StoryContent} />
     </Stack.Navigator>
   );
 }

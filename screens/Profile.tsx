@@ -5,7 +5,7 @@ import {CommonActions} from '@react-navigation/native';
 import profiledata from '../data/profile.json';
 import {HStack} from '@gluestack-ui/themed';
 import {styles} from '../styles/ProfilescreenStyle';
-function Profilescreen({navigation}: any) {
+function Profile({navigation}: any) {
   const [currentMode, setCurrentMode] = useState('grid');
   const [refreshing, setRefreshing] = useState(false);
   useEffect(() => {}, [currentMode]);
@@ -19,8 +19,8 @@ function Profilescreen({navigation}: any) {
       setRefreshing(false);
     }, 2000);
   };
-  const handleImagePress = (imageUrl: string) => {
-    navigation.navigate('BlogDetailscreen', {imageUrl});
+  const handleImagePress = (imageUrl: string,index:number) => {
+    navigation.navigate('BlogDetailscreen', {imageUrl,index});
   };
   return (
     <ScrollView
@@ -197,15 +197,15 @@ function Profilescreen({navigation}: any) {
                     item.Profile.length > 0 &&
                     item.Profile.map((data: any, index: number) => (
                       <Box key={index}>
-                      <TouchableOpacity
-                        onPress={() => handleImagePress(data.Url)}>
-                        <Image
-                          source={{uri: data.Url}}
-                          style={{width: data.Width, height: data.Height}}
-                          alt="profileImage"
-                          key={index}
-                        />
-                      </TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={() => handleImagePress(data.Url,data.id)}>
+                          <Image
+                            source={{uri: data.Url}}
+                            style={{width: data.Width, height: data.Height}}
+                            alt="profileImage"
+                            key={index}
+                          />
+                        </TouchableOpacity>
                       </Box>
                     ))}
                 </Box>
@@ -241,4 +241,4 @@ function Profilescreen({navigation}: any) {
   );
 }
 
-export default Profilescreen;
+export default Profile;

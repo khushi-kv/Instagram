@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SafeAreaView, ScrollView,Image} from 'react-native';
+import {SafeAreaView, ScrollView, Image} from 'react-native';
 import {
   Button,
   ButtonText,
@@ -8,7 +8,7 @@ import {
   VStack,
 } from '@gluestack-ui/themed';
 
-function Loginscreen({navigation}: any) {
+function Login({navigation}: any) {
   const [username, setUsername] = useState('');
   // eslint-disable-next-line @typescript-eslint/no-shadow
   const isValidUsername = (username: string) => {
@@ -75,4 +75,4 @@ function Loginscreen({navigation}: any) {
   );
 }
 
-export default Loginscreen;
+export default Login;

@@ -1,12 +1,12 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Homescreen from '../screens/Homescreen';
-import Searchscreen from '../screens/Searchscreen';
-import Addpostscreen from '../screens/Addpostscreen';
-import Profilescreen from '../screens/Profilescreen';
+import Homescreen from '../screens/Home';
+import Searchscreen from '../screens/Search';
+import Addpostscreen from '../screens/Addpost';
+import Profilescreen from '../screens/Profile';
 import {Image, View} from 'react-native';
-import Loginscreen from '../screens/Loginscreen';
-import Reelscreen from '../screens/Reelscreen';
+import Loginscreen from '../screens/Login';
+import Reelscreen from '../screens/Reels';
 import {createStackNavigator} from '@react-navigation/stack';
 const Tab = createBottomTabNavigator();
 function BottomTabs() {

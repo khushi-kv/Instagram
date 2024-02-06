@@ -13,9 +13,11 @@ export const styles = StyleSheet.create({
       color: 'black',
     },
     profileImages: {
+      width:500,
       flexDirection: 'row',
       flexWrap: 'wrap',
-      gap: 5,
+      gap: 4,
       top: 40,
+      right:10
     },
   });

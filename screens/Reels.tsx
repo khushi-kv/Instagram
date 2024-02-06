@@ -1,10 +1,10 @@
 import React from 'react'
 import { Text } from 'react-native'
 
-function Reelscreen() {
+function Reels() {
   return (
-    <Text>Reelscreen</Text>
+    <Text>Reels</Text>
   )
 }
 
-export default Reelscreen
+export default Reels

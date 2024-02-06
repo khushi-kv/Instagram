@@ -3,7 +3,7 @@ import {View, TextInput, Button, Image} from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import {useNavigation} from '@react-navigation/native';
 
-function Addpostscreen() {
+function Addpost() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [image, setImage] = useState<string | null>(null);
@@ -56,4 +56,4 @@ function Addpostscreen() {
   );
 }
 
-export default Addpostscreen;
+export default Addpost;

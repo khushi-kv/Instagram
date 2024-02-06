@@ -17,7 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 // @ts-ignore
 import AntdesignIcon from 'react-native-vector-icons/AntDesign';
 import Tabs from '../navigation/BottomTabs';
-import Storyscreen from './Storyscreen';
+import Storyscreen from './Story';
 
 // @ts-ignore
 
@@ -29,7 +29,7 @@ function shuffleArray(array: any[]) {
   return array;
 }
 let feed = [...feeds];
-function Homescreen() {
+function Home() {
   const [visibleFeedCount, setVisibleFeedCount] = useState(2);
   const [loadingMore, setLoadingMore] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -228,4 +228,4 @@ function Homescreen() {
   );
 }
 
-export default Homescreen;
+export default Home;
