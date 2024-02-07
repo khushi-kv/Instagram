@@ -19,8 +19,8 @@ function Profile({navigation}: any) {
       setRefreshing(false);
     }, 2000);
   };
-  const handleImagePress = (imageUrl: string,index:number) => {
-    navigation.navigate('BlogDetailscreen', {imageUrl,index});
+  const handleImagePress = (imageUrl: string, index: number) => {
+    navigation.navigate('BlogDetailscreen', {imageUrl, index});
   };
   return (
     <ScrollView
@@ -127,23 +127,61 @@ function Profile({navigation}: any) {
               <Text style={{color: 'black'}}>
                 Keep your favourite stories on your profile
               </Text>
-              <Button backgroundColor="#ffffff">
-                <Image
-                  source={{
-                    uri: 'https://static.thenounproject.com/png/103484-200.png',
-                  }}
-                  width={0}
-                  height={0}
+              <HStack >
+                <Button backgroundColor="#ffffff">
+                  <Image
+                    source={{
+                      uri: 'https://static.thenounproject.com/png/103484-200.png',
+                    }}
+                    width={0}
+                    height={0}
+                    position="absolute"
+                    left={0}
+                    top={8}
+                    alt="UserImage"
+                    rounded="$full"
+                    borderColor="black"
+                    borderWidth={1}
+                    padding={20}
+                  />
+                </Button>
+                <Button
                   position="absolute"
-                  left={0}
+                  left={60}
                   top={8}
+                  backgroundColor="lightgray"
                   alt="UserImage"
                   rounded="$full"
-                  borderColor="black"
-                  borderWidth={1}
                   padding={20}
                 />
-              </Button>
+                <Button
+                  position="absolute"
+                  left={120}
+                  top={8}
+                  backgroundColor="lightgray"
+                  alt="UserImage"
+                  rounded="$full"
+                  padding={20}
+                />
+                <Button
+                  position="absolute"
+                  left={180}
+                  top={8}
+                  backgroundColor="lightgray"
+                  alt="UserImage"
+                  rounded="$full"
+                  padding={20}
+                />
+                <Button
+                  position="absolute"
+                  left={250}
+                  top={8}
+                  backgroundColor="lightgray"
+                  alt="UserImage"
+                  rounded="$full"
+                  padding={20}
+                />
+              </HStack>
               <Text style={{color: 'black', top: 10, left: 5}}>New</Text>
 
               <HStack
@@ -198,7 +236,7 @@ function Profile({navigation}: any) {
                     item.Profile.map((data: any, index: number) => (
                       <Box key={index}>
                         <TouchableOpacity
-                          onPress={() => handleImagePress(data.Url,data.id)}>
+                          onPress={() => handleImagePress(data.Url, data.id)}>
                           <Image
                             source={{uri: data.Url}}
                             style={{width: data.Width, height: data.Height}}

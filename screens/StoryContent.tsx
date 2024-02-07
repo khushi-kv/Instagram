@@ -27,14 +27,14 @@ interface StoryProps {
 function StoryContent({route}: StoryProps) {
   useEffect(() => {
     let timer = setTimeout(() => {
-     navigation.goBack();
+      // navigation.goBack('Home');
     }, 5000);
     Animated.timing(progress, {
       toValue: 5,
       duration: 5000,
       useNativeDriver: false,
     }).start();
-    return ()=>clearTimeout(timer);
+    return () => clearTimeout(timer);
   }, []);
   const [progress, setProgress] = useState(new Animated.Value(0));
   const progressAnimation = progress.interpolate({
@@ -86,7 +86,7 @@ function StoryContent({route}: StoryProps) {
           <Text style={styles.text}>{username}</Text>
           <Text style={styles.hours}>11h </Text>
           {isStoryscreen && (
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity onPress={() => navigation.goBack('Home')}>
               <Ionic
                 name="close"
                 size={20}
