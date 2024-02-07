@@ -5,7 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AuthStack from './navigation/AuthStack';
 import {DataProvider} from './context/DataContext';
-import {MenuProvider} from "react-native-popup-menu"
+import {MenuProvider} from 'react-native-popup-menu';
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
