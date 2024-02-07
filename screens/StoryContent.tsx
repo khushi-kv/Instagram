@@ -1,8 +1,17 @@
-import React from 'react';
-import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
-import {RouteProp} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {
+  Image,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Animated,
+} from 'react-native';
+import {RouteProp, useNavigation} from '@react-navigation/native';
 import {HStack} from '@gluestack-ui/themed';
-
+import Ionic from 'react-native-vector-icons/Ionicons';
+import {TouchableOpacity} from 'react-native';
 interface StoryProps {
   route: RouteProp<
     {
@@ -16,7 +25,23 @@ interface StoryProps {
   >;
 }
 function StoryContent({route}: StoryProps) {
-  console.log('Storycontent');
+  useEffect(() => {
+    let timer = setTimeout(() => {
+     navigation.goBack();
+    }, 5000);
+    Animated.timing(progress, {
+      toValue: 5,
+      duration: 5000,
+      useNativeDriver: false,
+    }).start();
+    return ()=>clearTimeout(timer);
+  }, []);
+  const [progress, setProgress] = useState(new Animated.Value(0));
+  const progressAnimation = progress.interpolate({
+    inputRange: [0, 5],
+    outputRange: ['0%', '100%'],
+  });
+  const navigation = useNavigation();
   console.log('Route:', route);
   const imageUrl = route?.params?.imageUrl;
   const username = route?.params?.username;
@@ -25,8 +50,29 @@ function StoryContent({route}: StoryProps) {
   return (
     <View
       style={[styles.container, isStoryscreen ? styles.blackBackground : null]}>
+      {isStoryscreen && (
+        <>
+          <StatusBar backgroundColor={'black'} barStyle={'light-content'} />
+          <View
+            style={{
+              height: 3,
+              width: '100%',
+              borderWidth: 1,
+              backgroundColor: 'gray',
+              position: 'absolute',
+              top: 15,
+            }}>
+            <Animated.View
+              style={{
+                height: '100%',
+                backgroundColor: 'white',
+                width: progressAnimation,
+              }}></Animated.View>
+          </View>
+        </>
+      )}
       <>
-        <HStack top={5}>
+        <HStack top={20}>
           <Image
             source={{
               uri: imageUrl,
@@ -40,28 +86,26 @@ function StoryContent({route}: StoryProps) {
           <Text style={styles.text}>{username}</Text>
           <Text style={styles.hours}>11h </Text>
           {isStoryscreen && (
-            <Image
-              source={{
-                uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfD5w1dSUhGmYifAznYNrDuHhXHo09EzLe7D3qdI0yWw&s',
-              }}
-              width={25}
-              height={25}
-              top={5}
-              alt="Icon"
-              position="absolute"
-              right={10}
-            />
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Ionic
+                name="close"
+                size={20}
+                color="white"
+                position="absolute"
+                left={254}
+              />
+            </TouchableOpacity>
           )}
         </HStack>
         <Image
           source={{uri: imageUrl}}
-          style={{width: '100%', height: '85%', top: 10}}
+          style={{width: '100%', height: '80%', top: 30}}
           resizeMode="cover"
           onError={error => console.error('Image Error:', error)}
         />
       </>
       {isStoryscreen && (
-        <HStack space="lg">
+        <HStack space="lg" top={20}>
           <TextInput
             placeholder="Send a message"
             style={styles.placeholder}

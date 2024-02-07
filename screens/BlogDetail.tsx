@@ -194,11 +194,9 @@ const BlogDetail = React.memo(({route}: any) => {
                         <>
                           <TextInput
                             style={{
-                              backgroundColor: 'white',
                               color: 'black',
-                              left: 20,
-                              height: 40,
-                              width: '50%',
+
+                              bottom: 14,
                               paddingHorizontal: 10,
                               borderRadius: 8,
                             }}
@@ -209,7 +207,7 @@ const BlogDetail = React.memo(({route}: any) => {
                           />
                           <TouchableOpacity
                             onPress={() => handleSaveEdit(data.id)}>
-                            <Text style={{left: 0, top: 50}}>Save</Text>
+                            <Text style={{left: 0, }}>Save</Text>
                           </TouchableOpacity>
                         </>
                       ) : (
