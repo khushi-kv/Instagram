@@ -24,12 +24,9 @@ export const styles = StyleSheet.create({
     color: 'gray',
   },
   menuoptions: {
-    
     flexDirection: 'row',
     width: 500,
-    height: 200,
-
-    alignItems: 'center',
-    position: 'absolute', 
+    height: 200,alignItems: 'center',
+    position: 'absolute',
   },
 });

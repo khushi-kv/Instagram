@@ -29,17 +29,25 @@ function Login({navigation}: any) {
     <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Image
+          source={{
+            uri: 'https://img.freepik.com/premium-vector/modern-badge-logo-instagram-icon_578229-124.jpg',
+          }}
+          style={{alignSelf: 'center', marginTop: 60}}
+          width={100}
+          height={100}
+          alt="Instagram logo"
+        />
+        <Image
           // eslint-disable-next-line react-native/no-inline-styles
           style={{
             width: 350,
             height: 100,
-            marginTop: 40,
+
             alignSelf: 'center',
-            backgroundColor: '#FFFFFF',
           }}
           source={{
             uri: 'https://assets.turbologo.com/blog/en/2019/09/19084953/instagram-logo-illustration-958x575.png',
-            alt: 'Logo',
+            alt: ' Instagram text',
             alignSelf: 'center',
           }}
         />

@@ -59,4 +59,8 @@ export const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
+  AddPost:{
+    backgroundColor:'white',
+    // height:300,
+  }
 });

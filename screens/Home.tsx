@@ -13,10 +13,6 @@ import {SliderBox} from 'react-native-image-slider-box';
 import feeds from '../data/feed.json';
 import {styles} from '../styles/HomescreenStyle';
 import {useNavigation} from '@react-navigation/native';
-
-// @ts-ignore
-import AntdesignIcon from 'react-native-vector-icons/AntDesign';
-import Tabs from '../navigation/BottomTabs';
 import Storyscreen from './Story';
 
 // @ts-ignore
@@ -49,12 +45,35 @@ function Home() {
     }
   };
 
-  const onRefresh = useCallback(() => {
+  // const onRefresh = useCallback(() => {
+  //   setRefreshing(true);
+  //   const shuffledFeed = shuffleArray(feed);
+  //   setVisibleFeedCount(2);
+  //   feed = shuffledFeed;
+  //   setRefreshing(false);
+  // }, []);
+
+  const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    const shuffledFeed = shuffleArray(feed);
-    setVisibleFeedCount(2);
-    feed = shuffledFeed;
-    setRefreshing(false);
+    try {
+      // Fetch the updated feed data from feed.json
+      const response = await fetch('../data/feed.json');
+      const updatedFeed = await response.json();
+      
+      // Shuffle the updated feed data
+      const shuffledFeed = shuffleArray(updatedFeed);
+  
+      // Update the 'feed' variable with the shuffled data
+      feed = [...shuffledFeed];
+  
+      // Set the visible feed count to the initial value
+      setVisibleFeedCount(2);
+    } catch (error) {
+      console.error('Error refreshing feed:', error);
+    } finally {
+      // Set refreshing to false to stop the refresh animation
+      setRefreshing(false);
+    }
   }, []);
   const renderLoader = () => (
     <View style={styles.loaderContainer}>
