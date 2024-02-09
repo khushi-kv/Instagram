@@ -3,8 +3,9 @@ import {View, TextInput, Button, Image} from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import {useNavigation} from '@react-navigation/native';
 import {useData} from '../context/DataContext'; // Import the useData hook from your context file
-// import { writeFile } from 'fs/promises';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Profile from './Profile';
+import {v4 as uuidv4} from 'uuid';
 function Addpost() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -12,7 +13,8 @@ function Addpost() {
 
   const navigation = useNavigation();
   const {feeds, updateFeeds} = useData(); // Destructure feeds and updateFeeds from useData()
-
+  const {profile, updateProfiles} = useData();
+  // const {v4: uuidv4} = require('uuid');
   const selectImage = async () => {
     try {
       const response = await ImageCropPicker.openPicker({
@@ -38,19 +40,22 @@ function Addpost() {
       Date: new Date().toISOString(),
       Content: content,
     };
+    const profilePost = {
+      id: Date.now().toString(36),
+      Url: image,
+      Width: 127,
+      Height: 127,
+      caption: content,
+      date: new Date().toISOString(),
+    };
 
-    updateFeeds((prevFeeds: any) => [...prevFeeds, newPost]); // Use updateFeeds to update the feed state
-    try {
-      await AsyncStorage.setItem('feeds', JSON.stringify(feeds));
-      console.log('Feed data updated successfully!');
-    } catch (error) {
-      console.error('Error writing to AsyncStorage:', error);
-    }
-
-    // console.log("Feeds:",feeds);
-    // setTitle('');
-    // setContent('');
-    // setImage(null);
+    updateFeeds((prevFeeds: any) => [newPost, ...prevFeeds]); // Use updateFeeds to update the feed state
+    updateProfiles((prevProfiles: any) => {
+      return {...prevProfiles, Profile: [profilePost, ...prevProfiles.Profile]};
+    });
+    setTitle('');
+    setContent('');
+    setImage(null);
     navigation.navigate('Home');
   };
 

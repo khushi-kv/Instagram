@@ -2,7 +2,9 @@ import React, {createContext, useState, useContext} from 'react';
 import profileData from '../data/profile.json';
 import feedData from '../data/feed.json';
 
-interface Profile {
+export interface Profile {
+  filter(arg0: (post: any) => boolean): any;
+  Profile: any;
   id: string;
   Url: string;
   Width: number;
@@ -12,7 +14,7 @@ interface Profile {
   Username?: string;
 }
 
-interface Feed {
+export interface Feed {
   Title: string;
   Images: {
     Url: string;
@@ -24,45 +26,56 @@ interface Feed {
   Content: string;
 }
 
-interface DataContextProps {
+export interface DataContextProps {
   profiles: {
+    reduce(
+      arg0: (
+        foundPost: {
+          id: string;
+          Url: string;
+          caption: string;
+          date: string;
+        } | null,
+        profile: any,
+      ) => any,
+      arg1: null,
+    ): unknown;
+    map(arg0: (item: any, index: number) => React.JSX.Element): React.ReactNode;
     name: string;
     posts: number;
     followers: number;
     following: number;
     Profile: Profile[];
-  }[];
+  };
   updateProfiles: (
-    newProfiles: React.SetStateAction<
-      {
-        name: string;
-        posts: number;
-        followers: number;
-        following: number;
-        Profile: Profile[];
-      }[]
-    >,
+    newProfiles: React.SetStateAction<{
+      name: string;
+      posts: number;
+      followers: number;
+      following: number;
+      Profile: Profile[];
+    }>,
   ) => void;
   setProfiles: React.Dispatch<
-    React.SetStateAction<
-      {
-        name: string;
-        posts: number;
-        followers: number;
-        following: number;
-        Profile: Profile[];
-      }[]
-    >
+    React.SetStateAction<{
+      name: string;
+      posts: number;
+      followers: number;
+      following: number;
+      Profile: Profile[];
+    }>
   >;
-  feeds: Feed[][];
-  updateFeeds: (newFeeds: React.SetStateAction<Feed[][]>) => void;
+  feeds: Feed[];
+  updateFeeds: (newFeeds: React.SetStateAction<Feed[]>) => void;
 }
 
-const DataContext = createContext<DataContextProps | undefined>(undefined);
+export const DataContext = createContext<DataContextProps | undefined>(
+  undefined,
+);
 
 const DataProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
   const [profiles, setProfiles] = useState(profileData);
-  const [feeds, setFeeds] = useState([feedData]);
+  const [feeds, setFeeds] = useState(feedData);
 
   const updateProfiles = (
     newProfiles: React.SetStateAction<
@@ -78,7 +91,7 @@ const DataProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
     setProfiles(newProfiles);
   };
 
-  const updateFeeds = (newFeeds: React.SetStateAction<Feed[][]>) => {
+  const updateFeeds = (newFeeds: React.SetStateAction<Feed[]>) => {
     setFeeds(newFeeds);
   };
 

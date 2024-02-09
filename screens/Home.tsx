@@ -1,19 +1,19 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import {
   View,
   Text,
   FlatList,
   ActivityIndicator,
   RefreshControl,
-  ScrollView,
 } from 'react-native';
-import {Image, Box, HStack, VStack} from '@gluestack-ui/themed';
+import {Image, Box, HStack} from '@gluestack-ui/themed';
 // @ts-ignore
 import {SliderBox} from 'react-native-image-slider-box';
 import feeds from '../data/feed.json';
 import {styles} from '../styles/HomescreenStyle';
 import {useNavigation} from '@react-navigation/native';
 import Storyscreen from './Story';
+import {DataContext, Feed} from '../context/DataContext';
 
 // @ts-ignore
 
@@ -29,9 +29,12 @@ function Home() {
   const [visibleFeedCount, setVisibleFeedCount] = useState(2);
   const [loadingMore, setLoadingMore] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const context = useContext(DataContext);
+  console.log('context', context?.feeds);
   const handleEndReached = () => {
     console.log('visibleFeedCount:', visibleFeedCount);
     console.log('feed.length:', feed.length);
+
     // Load more content when the end is reached
     if (visibleFeedCount < feed.length && !loadingMore) {
       setLoadingMore(true);
@@ -45,35 +48,12 @@ function Home() {
     }
   };
 
-  // const onRefresh = useCallback(() => {
-  //   setRefreshing(true);
-  //   const shuffledFeed = shuffleArray(feed);
-  //   setVisibleFeedCount(2);
-  //   feed = shuffledFeed;
-  //   setRefreshing(false);
-  // }, []);
-
-  const onRefresh = useCallback(async () => {
+  const onRefresh = useCallback(() => {
     setRefreshing(true);
-    try {
-      // Fetch the updated feed data from feed.json
-      const response = await fetch('../data/feed.json');
-      const updatedFeed = await response.json();
-      
-      // Shuffle the updated feed data
-      const shuffledFeed = shuffleArray(updatedFeed);
-  
-      // Update the 'feed' variable with the shuffled data
-      feed = [...shuffledFeed];
-  
-      // Set the visible feed count to the initial value
-      setVisibleFeedCount(2);
-    } catch (error) {
-      console.error('Error refreshing feed:', error);
-    } finally {
-      // Set refreshing to false to stop the refresh animation
-      setRefreshing(false);
-    }
+    const shuffledFeed = shuffleArray(feed);
+    setVisibleFeedCount(2);
+    feed = shuffledFeed;
+    setRefreshing(false);
   }, []);
   const renderLoader = () => (
     <View style={styles.loaderContainer}>
@@ -81,7 +61,6 @@ function Home() {
       <Text style={styles.loaderText}>Loading more content...</Text>
     </View>
   );
-  const navigation = useNavigation();
 
   const renderHeader = () => (
     <View style={styles.container}>
@@ -127,9 +106,9 @@ function Home() {
       <FlatList
         ListHeaderComponent={renderHeader}
         ListHeaderComponentStyle={styles.headerContainer}
-        data={feed.slice(0, visibleFeedCount)}
+        data={context?.feeds.slice(0, visibleFeedCount)}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({item: feedItem, index}) => (
+        renderItem={({item: feedItem, index}: {item: Feed; index: number}) => (
           <Box marginTop={30}>
             <Box>
               <View key={index}>
