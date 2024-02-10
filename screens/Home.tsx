@@ -11,12 +11,8 @@ import {Image, Box, HStack} from '@gluestack-ui/themed';
 import {SliderBox} from 'react-native-image-slider-box';
 import feeds from '../data/feed.json';
 import {styles} from '../styles/HomescreenStyle';
-import {useNavigation} from '@react-navigation/native';
 import Storyscreen from './Story';
 import {DataContext, Feed} from '../context/DataContext';
-
-// @ts-ignore
-
 function shuffleArray(array: any[]) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -30,10 +26,10 @@ function Home() {
   const [loadingMore, setLoadingMore] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const context = useContext(DataContext);
-  console.log('context', context?.feeds);
+  // console.log('context', context?.feeds);
   const handleEndReached = () => {
-    console.log('visibleFeedCount:', visibleFeedCount);
-    console.log('feed.length:', feed.length);
+    // console.log('visibleFeedCount:', visibleFeedCount);
+    // console.log('feed.length:', feed.length);
 
     // Load more content when the end is reached
     if (visibleFeedCount < feed.length && !loadingMore) {

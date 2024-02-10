@@ -9,7 +9,7 @@ function ProfileData({navigation}: any) {
   const [refreshing, setRefreshing] = useState(false);
   const context = useContext(DataContext);
 
-  console.log('contextProfile', context?.profiles);
+  // console.log('contextProfile', context?.profiles);
   useEffect(() => {}, [currentMode]);
   const handleModeChange = (mode: string) => {
     setCurrentMode(mode);

@@ -2,19 +2,16 @@ import React, {useState} from 'react';
 import {View, TextInput, Button, Image} from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import {useNavigation} from '@react-navigation/native';
-import {useData} from '../context/DataContext'; // Import the useData hook from your context file
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Profile from './Profile';
-import {v4 as uuidv4} from 'uuid';
+import {useData} from '../context/DataContext';
 function Addpost() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState<string | null>(null);
 
   const navigation = useNavigation();
-  const {feeds, updateFeeds} = useData(); // Destructure feeds and updateFeeds from useData()
-  const {profile, updateProfiles} = useData();
-  // const {v4: uuidv4} = require('uuid');
+  const {updateFeeds} = useData(); // Destructure feeds and updateFeeds from useData()
+  const {updateProfiles} = useData();
+
   const selectImage = async () => {
     try {
       const response = await ImageCropPicker.openPicker({
